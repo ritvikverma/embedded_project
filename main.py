@@ -7,4 +7,4 @@ camera.rotation = 180
 
 camera.start_preview()
 sleep(5)
-camera.stop_preaview()
+camera.stop_preview()
