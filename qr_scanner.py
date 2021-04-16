@@ -6,7 +6,6 @@ from imutils.video import VideoStream
 from pyzbar import pyzbar
 
 vs = VideoStream(src=0).start()  # Uncomment this if you are using Webcam
-# vs = VideoStream(usePiCamera=True).start()  # For Pi Camera
 time.sleep(2.0)
 
 
