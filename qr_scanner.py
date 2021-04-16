@@ -35,8 +35,8 @@ while True:
     cv2.imshow("COVID-19 Vaccine Verification System", frame)
     key = cv2.waitKey(1) & 0xFF
 
-    # if the `s` key is pressed, break from the loop
-    if key == ord("s"):
+    # if the `q` key is pressed, break from the loop
+    if key == ord("q"):
         break
 
 print("[INFO] cleaning up...")
