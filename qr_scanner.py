@@ -9,6 +9,8 @@ detector = cv2.QRCodeDetector()
 while True:
     # get the image
     _, img = cap.read()
+    img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
+    img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
     # get bounding box coords and data
     data, bbox, _ = detector.detectAndDecode(img)
 
