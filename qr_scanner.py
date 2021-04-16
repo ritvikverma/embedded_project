@@ -14,7 +14,7 @@ def get_vaccine_data(vaccine_raw_data):
     vaccine_raw_data = vaccine_raw_data.split('|')
     vaccine_data = {'hkid': vaccine_raw_data[5],
                     'name': vaccine_raw_data[6],
-                    'date': vaccine_raw_data[17],
+                    'date': vaccine_raw_data[7],
                     'vaccine': vaccine_raw_data[8]}
     return vaccine_data
 
