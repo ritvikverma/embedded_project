@@ -6,8 +6,8 @@ from pyzbar import pyzbar  # if you get errors, do brew install zbar on terminal
 
 def execute_from_image(img):
     image = cv2.imread(img)
-    img_height = math.ceil(image.shape[0] * 0.5)  # Crop ratio for height
-    img_width = math.ceil(image.shape[1] * 0.5)  # Crop ratio for width
+    img_height = int(math.ceil(image.shape[0] * 0.5))  # Crop ratio for height
+    img_width = int(math.ceil(image.shape[1] * 0.5))  # Crop ratio for width
     cropped = image[-img_height:, 0:img_width]  # little confusing, but image starts from top left, not bottom
     barcodes = pyzbar.decode(cropped)
     for barcode in barcodes:
@@ -24,9 +24,5 @@ def get_vaccine_data(vaccine_raw_data):
 
 
 if __name__ == '__main__':
-    try:
-        vaccine_raw_data = execute_from_image('./Vaccine_Record_Ritvik.jpg').split('|')
-        print(get_vaccine_data(vaccine_raw_data))
-
-    except:
-        print('Cannot Read QR code')
+    vaccine_raw_data = execute_from_image('./Vaccine_Record_Ritvik.jpg').split('|')
+    print(get_vaccine_data(vaccine_raw_data))
