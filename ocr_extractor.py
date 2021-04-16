@@ -101,4 +101,4 @@ def execute(file_name):
 
 
 if __name__ == '__main__':
-    print(execute('../Vaccine_Record_Ritvik.jpg'))
+    print(execute('./HKID_Ritvik.png'))
