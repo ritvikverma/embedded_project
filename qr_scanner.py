@@ -1,32 +1,44 @@
+import time
+
 import cv2
+import imutils
+from imutils.video import VideoStream
+from pyzbar import pyzbar
 
-# set up camera object
-cap = cv2.VideoCapture(0)
+vs = VideoStream(src=0).start()  # Uncomment this if you are using Webcam
+# vs = VideoStream(usePiCamera=True).start()  # For Pi Camera
+time.sleep(2.0)
 
-# QR code detection object
-detector = cv2.QRCodeDetector()
+
+def get_vaccine_data(vaccine_raw_data):
+    vaccine_raw_data = vaccine_raw_data.split('|')
+    vaccine_data = {'hkid': vaccine_raw_data[5],
+                    'name': vaccine_raw_data[6],
+                    'date': vaccine_raw_data[17],
+                    'vaccine': vaccine_raw_data[8]}
+    return vaccine_data
+
 
 while True:
-    # get the image
-    _, img = cap.read()
-    img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
-    img = cv2.rotate(img, cv2.ROTATE_90_CLOCKWISE)
-    # get bounding box coords and data
-    data, bbox, _ = detector.detectAndDecode(img)
+    frame = vs.read()
+    frame = imutils.resize(frame, width=800)
+    barcodes = pyzbar.decode(frame)
+    for barcode in barcodes:
+        (x, y, w, h) = barcode.rect
+        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)
+        barcodeData = barcode.data.decode("utf-8")
+        vaccine_data = get_vaccine_data(barcodeData)
+        text = vaccine_data['name'] + "(" + vaccine_data['hkid'] + ")"
+        cv2.putText(frame, text, (x, y - 10),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 255), 2)
 
-    # if there is a bounding box, draw one, along with the data
-    if bbox is not None:
-        for i in range(len(bbox)):
-            cv2.line(img, tuple(bbox[i][0]), tuple(bbox[(i + 1) % len(bbox)][0]), color=(255,
-                                                                                         0, 255), thickness=2)
-        cv2.putText(img, data, (int(bbox[0][0][0]), int(bbox[0][0][1]) - 10), cv2.FONT_HERSHEY_SIMPLEX,
-                    0.5, (0, 255, 0), 2)
-        if data:
-            print("data found: ", data)
-    # display the image preview
-    cv2.imshow("code detector", img)
-    if cv2.waitKey(1) == ord("q"):
+    cv2.imshow("COVID-19 Vaccine Verification System", frame)
+    key = cv2.waitKey(1) & 0xFF
+
+    # if the `s` key is pressed, break from the loop
+    if key == ord("s"):
         break
-# free camera object and exit
-cap.release()
+
+print("[INFO] cleaning up...")
 cv2.destroyAllWindows()
+vs.stop()
