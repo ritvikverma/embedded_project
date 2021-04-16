@@ -20,12 +20,12 @@ def get_vaccine_data(vaccine_raw_data):
                     'name': vaccine_raw_data[6],
                     'date': vaccine_raw_data[17],
                     'vaccine': vaccine_raw_data[8]}
-    print(vaccine_data)
+    return (vaccine_data)
 
 
 if __name__ == '__main__':
     try:
-        vaccine_raw_data = execute_from_image('../Vaccine_Record_Ritvik.jpg').split('|')
+        vaccine_raw_data = execute_from_image('./Vaccine_Record_Ritvik.jpg').split('|')
         print(get_vaccine_data(vaccine_raw_data))
 
     except:
