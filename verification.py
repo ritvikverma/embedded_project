@@ -38,14 +38,14 @@ while True:
 
     if mode == RESULTS:
         if all(list(final_results.values())):
-            cv2.putText(frame, "Welcome to Hong Kong!", (width // 5, height // 7),
+            cv2.putText(frame, "Welcome!", (width // 5, height // 7),
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 150), 2)
             cv2.putText(frame, "Name: " + final_results['name'], (width // 5, height * 2 // 7),
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 150), 2)
             cv2.putText(frame, "Vaccination Date: " + final_results['vaccination_date'], (width // 5, height * 3 // 7),
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 150), 2)
             cv2.putText(frame, "Vaccine: " + final_results['vaccine'], (width // 5, height * 4 // 7),
-                        cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 150), 2)
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 150), 2)
             cv2.putText(frame, "HKID Number: " + final_results['hkid_number'], (width // 5, height * 5 // 7),
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 150), 2)
 
