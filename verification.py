@@ -52,9 +52,6 @@ while True:
         else:
             cv2.putText(frame, "Verification Failed.", (width // 5, height // 5),
                         cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
-            cv2.putText(frame, "Please proceed to an immigration checkpoint", (width // 5, height // 4),
-                        cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
-
 
     elif mode == HKID_SCAN:
         if countdown_timer > 5:
