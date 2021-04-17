@@ -30,6 +30,7 @@ def get_text():
 
 while True:
     frame = vs.read()
+    frame = cv2.resize(frame, (800, 450))
     height, width, channels = frame.shape
     upper_left = (width // 5, height // 5)
     bottom_right = (width * 4 // 5, height * 4 // 5)
