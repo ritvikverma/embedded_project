@@ -83,7 +83,7 @@ while True:
         mode = HKID_SCAN
 
     elif not vaccine_data and countdown_timer <= 10:
-        cv2.putText(frame, "ERROR! Please restart the COVID vaccine verification process", (width // 6, height // 5),
+        cv2.putText(frame, "ERROR! Please restart the process", (width // 6, height // 5),
                     cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
         if countdown_timer < 5:
             break
