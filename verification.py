@@ -7,7 +7,7 @@ from pyzbar import pyzbar
 from data_processing import get_vaccine_data, get_triangulated_data
 from ocr_extractor import execute
 
-vs = VideoStream(src=0).start()  # Uncomment this if you are using Webcam
+vs = VideoStream(src=0).start()
 time.sleep(2)
 countdown_timer = 20
 prev_time = time.time()
