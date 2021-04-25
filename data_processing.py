@@ -2,7 +2,7 @@ import re
 
 
 def get_triangulated_data(vaccine_data, hkid_data):
-    hkid_data = ' HONG KONG IDENTITY CARD VERMA, Ritvik HI Date of Birth 29-12-1998 CO EM Date of Issue (08-17) 28-08-17 M715467(A) Scanned with CamScanner'
+    # hkid_data = ' HONG KONG IDENTITY CARD VERMA, Ritvik HI Date of Birth 29-12-1998 CO EM Date of Issue (08-17) 28-08-17 M715467(A) Scanned with CamScanner'
     results = {'vaccination_date': vaccine_data['date'],
                'vaccine': " ".join(vaccine_data['vaccine'].split(" ")[:5]),
                'hkid_number': '',
