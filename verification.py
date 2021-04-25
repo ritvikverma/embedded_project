@@ -3,10 +3,12 @@ import time
 import cv2
 from imutils.video import VideoStream
 from pyzbar import pyzbar
+from sense_hat import SenseHat
 
 from data_processing import get_vaccine_data, get_triangulated_data
 from ocr_extractor import execute
 
+s = SenseHat()
 vs = VideoStream(src=0).start()
 time.sleep(2)
 countdown_timer = 20
@@ -29,12 +31,18 @@ def get_text():
 
 
 while True:
+    temp = round(s.temp)
+    hum = round(s.humidity)
     frame = vs.read()
     frame = cv2.resize(frame, (800, 450))
     height, width, channels = frame.shape
     upper_left = (width // 5, height // 5)
     bottom_right = (width * 4 // 5, height * 4 // 5)
     curr_time = time.time()
+    cv2.putText(frame, "Temperature: "+str(temp) + "C", (width - 300, height // 8 - 20),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 150), 2)
+    cv2.putText(frame, "Humidity: "+str(hum) + "%", (width - 300, height // 6 - 20),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 150), 2)
 
     if mode == RESULTS:
         if all(list(final_results.values())):
